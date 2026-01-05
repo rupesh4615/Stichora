@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STITCHORA - Categories</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff;
+            color: #333;
+        }
+
+        header {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        header h1 {
+            margin-bottom: 5px;
+        }
+
+        nav {
+            background: #444;
+            text-align: center;
+            padding: 12px 0;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        .category-card {
+            border: 1px solid #ddd;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            background: #f8f8f8;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .category-card h2 {
+            padding: 15px;
+            font-size: 1.5rem;
+            color: #222;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>STITCHORA</h1>
+        <p>Select a Category</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="category.html">Categories</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="categories">
+
+        <div class="category-card" onclick="location.href='embridory.html'">
+            <img src="https://frockandfrill.com/cdn/shop/files/SS3_21119_1270x.jpg" alt="Embroidery">
+            <h2>Embroidery</h2>
+        </div>
+
+        <div class="category-card" onclick="location.href='customisable.html'">
+            <img src="https://cdn.shopify.com/s/files/1/0911/7472/files/IMG_5057_2_1024x1024.jpg?v=1639121738" alt="Customizable">
+            <h2>Customizable</h2>
+        </div>
+
+        <div class="category-card" onclick="location.href='readytowear.html'">
+            <img src="https://www.fashionnation.in/cdn/shop/files/destination-wedding-wear-multi-colour-georgette-indo-western-ready-to-wear-gown.jpg?v=1719473054&width=720" alt="Ready to Wear">
+            <h2>Ready to Wear</h2>
+        </div>
+
+    </div>
+
+    <footer>
+        &copy; 2026 STITCHAURA — All Rights Reserved
+    </footer>
+
+</body>
+</html>
