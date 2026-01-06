@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women | Stitchora</title>
+
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+/* LEFT */
+.nav-left {
+  display: flex;
+  align-items: center;
+  
+}
+
+.logo-img {
+  height: 38px;
+  width: auto;
+  height: 140px;
+  display: block;
+}
+
+.brand-text {
+  font-size: 26px;
+  font-weight: 600;
+  color: #217448;
+}
+
+/* CENTER */
+.nav-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-links a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+  font-size: 15px;
+}
+
+.nav-links a.active {
+  font-weight: 600;
+  border-bottom: 2px solid #8b2c2c;
+}
+
+.search-bar {
+  width: 700px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #8b2c2c;
+}
+
+/* RIGHT */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-link {
+  text-decoration: none;
+  font-size: 14px;
+  color: #333;
+}
+
+.auth-link:hover {
+  color: #8b2c2c;
+}
+
+/* HERO SECTION */
+.hero {
+  height: 80vh;
+  min-height: 520px;
+  background-image: url(images/bac.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+.hero-content {
+  position: relative;
+  color: #fff;
+  margin-left: 60%;
+}
+
+.hero-content button {
+  padding: 12px 30px;
+  border: none;
+  background: #b22222;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.hero-content button:hover {
+  background: #8b1a1a;
+}
+
+/* CATEGORY SECTION */
+.categories {
+  padding: 60px 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  background: #faf7f5;
+}
+
+.category-card {
+  background: #fff;
+  padding: 30px;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+}
+
+.category-card h3 {
+  font-size: 18px;
+}
+
+/* AI STYLING STRIP */
+.ai-strip {
+  background: #f3e6e2;
+  padding: 50px 40px;
+  text-align: center;
+}
+
+.ai-strip h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.ai-strip p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.ai-strip button {
+  padding: 12px 26px;
+  border: none;
+  background: #8b2c2c;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.ai-strip button:hover {
+  background: #6f2020;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero-content {
+    margin-left: 10%;
+  }
+
+  .search-bar {
+    width: 260px;
+  }
+
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-links,
+  .search-bar {
+    display: none;
+  }
+
+  .categories {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <!-- LEFT -->
+  <div class="nav-left">
+    <img src="images/logo.png" alt="Stitchora Logo" class="logo-img">
+    <span class="brand-text">STITCHORA</span>
+  </div>
+
+  <!-- CENTER -->
+  <div class="nav-center">
+    <nav class="nav-links">
+      <a href="#">New Arrivals</a>
+      <a href="#" class="active">Women</a>
+      <a href="#">Men</a>
+      <a href="#">Kids</a>
+      <a href="#">Home</a>
+      <a href="#">Collection</a>
+      <a href="#">Sale</a>
+    </nav>
+
+    <input type="text" class="search-bar"
+      placeholder="Search for styles, fabrics, designs...">
+  </div>
+
+  <!-- RIGHT -->
+  <div class="nav-right">
+    <a href="#" class="auth-link">Login</a>
+    <span>|</span>
+    <a href="#" class="auth-link">Register</a>
+  </div>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories">
+  <div class="category-card"><h3>Buy</h3></div>
+  <div class="category-card"><h3>Rent</h3></div>
+  <div class="category-card"><h3>Sell</h3></div>
+  <div class="category-card"><h3>AI Styling</h3></div>
+</section>
+
+<!-- AI STYLING STRIP -->
+<section class="ai-strip">
+  <h2>Styled by AI. Tailored for You.</h2>
+  <p>Get outfit suggestions and assign the perfect tailor instantly.</p>
+  <button>Try AI Styling</button>
+</section>
+
+</body>
+</html>
