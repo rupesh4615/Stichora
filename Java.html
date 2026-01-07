@@ -1,0 +1,267 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stitchora Marketplace</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f5f5f5;color:#333}
+
+/* HEADER */
+header{
+  background:#111;color:#fff;
+  padding:20px 40px;
+  display:flex;justify-content:space-between;align-items:center
+}
+nav a{
+  color:#fff;margin-left:20px;
+  text-decoration:none;cursor:pointer
+}
+nav a:hover{text-decoration:underline}
+
+/* SECTIONS */
+section{display:none;padding:40px}
+section.active{display:block}
+
+/* CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+}
+.card{
+  background:#fff;border-radius:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+  overflow:hidden;transition:.3s
+}
+.card:hover{transform:translateY(-6px)}
+.card img{width:100%;height:260px;object-fit:cover}
+.card div{padding:15px;text-align:center}
+.badge{
+  display:inline-block;
+  background:#4a148c;color:#fff;
+  padding:4px 10px;border-radius:20px;
+  font-size:12px;margin-bottom:8px
+}
+button{
+  background:#4a148c;color:#fff;
+  border:none;border-radius:20px;
+  padding:10px 16px;margin-top:10px;
+  cursor:pointer
+}
+button:hover{opacity:.9}
+
+/* FORMS */
+form{
+  max-width:350px;margin:auto;
+  background:#fff;padding:25px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.15)
+}
+input{
+  width:100%;padding:10px;
+  margin:10px 0;border-radius:6px;
+  border:1px solid #ccc
+}
+h2{text-align:center;color:#4a148c;margin-bottom:20px}
+
+/* FOOTER */
+footer{
+  background:#111;color:#fff;
+  text-align:center;padding:20px;margin-top:40px
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>STITCHORA</h1>
+<nav>
+  <a onclick="show('market')">Marketplace</a>
+  <a onclick="show('sell')">Sell</a>
+  <a onclick="showCart()">🛒 Cart (<span id="cartCount">0</span>)</a>
+  <a onclick="show('login')">Login</a>
+  <a onclick="logout()">Logout</a>
+</nav>
+</header>
+
+<!-- MARKETPLACE -->
+<section id="market" class="active">
+<h2>Marketplace</h2>
+<div class="grid" id="marketplace"></div>
+</section>
+
+<!-- SELL -->
+<section id="sell">
+<h2>Sell Your Clothes</h2>
+<form onsubmit="addProduct(event)">
+<input placeholder="Product Name" id="pname" required>
+<input placeholder="Price" id="price" required>
+<input placeholder="Material" id="material" required>
+<input placeholder="Image URL" id="image" required>
+<button>Add Product</button>
+</form>
+</section>
+
+<!-- CART -->
+<section id="cart">
+<h2>Your Cart</h2>
+<div class="grid" id="cartItems"></div>
+<h3 id="cartTotal" style="text-align:center;margin-top:20px"></h3>
+</section>
+
+<!-- LOGIN -->
+<section id="login">
+<h2>Login / Register</h2>
+<form>
+<input placeholder="Email" id="email">
+<input type="password" placeholder="Password" id="password">
+<button type="button" onclick="login()">Login</button>
+<button type="button" onclick="register()">Register</button>
+<hr style="margin:15px 0">
+<button type="button" onclick="googleLogin()" style="background:#fff;color:#444;border:1px solid #ccc">
+<img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" width="18"> Continue with Google
+</button>
+</form>
+</section>
+
+<footer>© 2026 Stitchora</footer>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script>
+/* 🔥 FIREBASE CONFIG (REPLACE WITH YOURS) */
+firebase.initializeApp({
+  apiKey:"YOUR_API_KEY",
+  authDomain:"YOUR_PROJECT.firebaseapp.com",
+  projectId:"YOUR_PROJECT_ID"
+});
+
+const auth=firebase.auth();
+const db=firebase.firestore();
+
+/* NAV */
+function show(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+/* AUTH */
+function login(){
+  auth.signInWithEmailAndPassword(email.value,password.value)
+  .then(()=>show('market'))
+  .catch(e=>alert(e.message))
+}
+function register(){
+  auth.createUserWithEmailAndPassword(email.value,password.value)
+  .then(()=>show('market'))
+  .catch(e=>alert(e.message))
+}
+function logout(){auth.signOut();show('login')}
+
+/* GOOGLE LOGIN */
+const provider=new firebase.auth.GoogleAuthProvider();
+function googleLogin(){
+  auth.signInWithPopup(provider).then(()=>show('market'))
+}
+
+/* PRODUCTS */
+const demoProducts=[
+{name:"Men Cotton Shirt",price:1299,material:"Cotton",
+image:"https://www.crimsouneclub.com/cdn/shop/files/SSH1256_7.jpg?v=1754564616"},
+{name:"Women Summer Dress",price:1899,material:"Rayon",
+image:"https://thevishnu.in/cdn/shop/articles/blog1_vishnu.png?v=1718008804"},
+{name:"Men Linen Kurta",price:1599,material:"Linen",
+image:"https://pictures.kartmax.in/live/inside/800x800/sites/9s145MyZrWdIAwpU0JYS/product-images/sage_green_linen_kurta_suit_1681722505ak_451_olive_1.jpg"}
+];
+
+const market=document.getElementById("marketplace");
+
+/* LOAD DEMO */
+demoProducts.forEach(p=>renderProduct(p));
+
+/* FIREBASE PRODUCTS */
+db.collection("products").onSnapshot(s=>{
+  s.forEach(d=>renderProduct(d.data()))
+});
+
+/* RENDER */
+function renderProduct(p){
+  market.innerHTML+=`
+  <div class="card">
+    <img src="${p.image}">
+    <div>
+      <span class="badge">${p.material}</span>
+      <h4>${p.name}</h4>
+      <p><b>₹${p.price}</b></p>
+      <button onclick='addToCart(${JSON.stringify(p)})'>Add to Cart</button>
+    </div>
+  </div>`;
+}
+
+/* SELL */
+function addProduct(e){
+  e.preventDefault();
+  db.collection("products").add({
+    name:pname.value,
+    price:price.value,
+    material:material.value,
+    image:image.value
+  });
+  alert("Product added!");
+  e.target.reset();
+}
+
+/* CART */
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+function updateCartCount(){
+  cartCount.innerText=cart.length;
+}
+updateCartCount();
+
+function addToCart(p){
+  cart.push(p);
+  localStorage.setItem("cart",JSON.stringify(cart));
+  updateCartCount();
+}
+
+function showCart(){
+  show('cart');
+  cartItems.innerHTML="";
+  let total=0;
+  cart.forEach((p,i)=>{
+    total+=Number(p.price);
+    cartItems.innerHTML+=`
+    <div class="card">
+      <img src="${p.image}">
+      <div>
+        <span class="badge">${p.material}</span>
+        <h4>${p.name}</h4>
+        <p>₹${p.price}</p>
+        <button onclick="remove(${i})">Remove</button>
+      </div>
+    </div>`;
+  });
+  cartTotal.innerText="Total: ₹"+total;
+}
+function remove(i){
+  cart.splice(i,1);
+  localStorage.setItem("cart",JSON.stringify(cart));
+  updateCartCount();
+  showCart();
+}
+
+/* AUTO LOGIN */
+auth.onAuthStateChanged(u=>{
+  if(u) show('market');
+});
+</script>
+
+</body>
+</html>
